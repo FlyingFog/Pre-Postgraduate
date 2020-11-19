@@ -764,10 +764,6 @@ RETURN e.id,e.name,e.sal,e.deptno
 
 ```
 
-
-
-
-
 例子：
 
 ```
@@ -797,6 +793,49 @@ RETURN e.id,e.name,e.dob
 MATCH (cc:CreditCard)
 RETURN cc.id,cc.number,cc.cvv,cc.expiredate
 
+```
+
+### 2.12 ID属性 | Caption标题
+
+在Neo4j中，“Id”是节点和关系的默认内部属性。 这意味着，当我们创建一个新的节点或关系时，Neo4j数据库服务器将为内部使用分配一个数字。 它会自动递增。
+
+```
+例子：
+CREATE (tweet:Tweet{message:"Hello"})
+MATCH (tweet:Tweet{message:"Hello"})
+RETURN tweet
+查看其ID = 0
+再执行一次 
+CREATE (tweet:Tweet{message:"Hello"})
+在查看 1
+```
+
+在Neo4j数据中，当我们在Neo4j DATA浏览器中执行MATCH + RETURN命令以查看UI视图中的数据时，通过使用它们的Id属性显示节点和/或关系结果。 它被称为“CAPTION”的id属性。
+
+```
+执行MATCH + RETURN命令以查看UI视图中的数据时，它通过id属性显示节点和/或关系结果为“CAPTION”。
+MATCH (tweet:Tweet{message:"Hello"})
+RETURN tweet
+
+如何更改节点或Neo4j数据浏览器UI视图中的关系的“CAPTION”。
+MATCH (tweet:Tweet{message:"Hello"})
+RETURN tweet
+在UI界面下更改样式选为message
+```
+
+### 2.13 方向关系
+
+在Neo4j中，两个节点之间的关系是有方向性的。 它们是单向或双向的。
+
+由于Neo4j遵循属性图数据模型，它应该只支持方向关系。 如果我们尝试创建一个没有任何方向的关系，那么Neo4j DB服务器应该抛出一个错误。
+
+```
+所有Neo4j关系是有方向性的。
+//错误
+CREATE (n1:Node1)-[r1:Relationship]-(n2:Node2)
+
+CREATE (n1:Node1)-[r1:Relationship]->(n2:Node2)
+显示Neo4j CQL CREATE命令仅支持方向关系。
 ```
 
 
